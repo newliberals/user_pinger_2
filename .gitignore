@@ -7,3 +7,5 @@ variables.env*
 
 # Jetbrains files
 .idea/*
+# .env file
+.env

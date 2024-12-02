@@ -29,6 +29,9 @@ CREATE TABLE IF NOT EXISTS ping_groups (
     created_epoch_sec INTEGER NOT NULL
 );
 
+INSERT OR IGNORE INTO ping_groups (group_id, name, description, category, protected, locked, hidden, created_epoch_sec)
+VALUES (0, 'DATING', 'Dating', 'dating group', 0, 0, 0, strftime('%s', 'now'));
+
 -- usernames MUST be all lowercase
 CREATE TABLE IF NOT EXISTS subscriptions (
     username TEXT NOT NULL,

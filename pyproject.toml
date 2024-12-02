@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "user-pinger-2"
+version = "0.1.0"
+description = ""
+authors = ["Ari <thearisoul@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+praw = "^7.8.1"
+uvicorn = "^0.32.1"
+requests-unixsocket = "^0.3.0"
+fastapi = "^0.115.5"
+python-dotenv = "^1.0.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

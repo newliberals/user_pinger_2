@@ -1,8 +1,8 @@
 """Script for running user_pinger bot."""
-
+import logging
 import os
 import time
-from typing import Deque
+from collections import deque
 import sqlite3
 import string
 import sys
@@ -11,9 +11,13 @@ import urllib.parse
 import praw
 import prawcore
 
-import slack_python_logging
 import pinglib
 
+import dotenv
+dotenv.load_dotenv()
+
+
+logger = logging.getLogger(__name__)
 
 class UserPinger:
     """Main Bot Class -- instantiate and call listen() to run"""
@@ -34,7 +38,7 @@ class UserPinger:
         # non-idempotent actions are taken. This gives us the best chance of
         # recovering from an error on Reddit's side that may resolve on retries
         # while ensuring we never message someone twice
-        self.parsed = Deque(maxlen=1000)
+        self.parsed = deque(maxlen=1000)
         self.start_time = time.time()
         # Create our DB connection and initialize the database if empty
         # Keeping the handle open shouldn't impact data correctness
@@ -546,11 +550,6 @@ if __name__ == "__main__":
         user_agent="linux:user_pinger_2-bot:v0.0.1 (by /u/jenbanim)"
     )
     # TODO put in environment variables
-    logger = slack_python_logging.getLogger(
-        app_name = "user_pinger",
-        slack_loglevel = "CRITICAL",
-        stream_loglevel = "INFO"
-    )
     user_pinger = UserPinger(reddit, logger)
 
     # Log uncaught exceptions to Slack before exiting

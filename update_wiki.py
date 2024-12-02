@@ -6,8 +6,6 @@ import time
 
 import praw
 
-import slack_python_logging
-
 
 def update(reddit, subreddit, after_epoch):
     """Update the wiki documentation"""
@@ -103,14 +101,7 @@ if __name__ == "__main__":
         user_agent="linux:user_pinger_2-wiki_updater:v0.0.1 (by /u/jenbanim)"
     )
     # TODO put in environment variables
-    logger = slack_python_logging.getLogger(
-        app_name = "user_pinger-wiki_updater",
-        slack_loglevel = "CRITICAL",
-        stream_loglevel = "INFO"
-    )
     after_epoch = time.time() - 60*60*24*7 # count pings in last week
     subreddit = os.environ["SUBREDDIT"]
 
-    logger.info("Beginning update")
     update(reddit, subreddit, after_epoch)
-    logger.info("Update complete")

@@ -10,15 +10,8 @@ import time
 import praw
 import prawcore
 
-import slack_python_logging
-
-
-# TODO put in environment variables
-logger = slack_python_logging.getLogger(
-    app_name = "user_pinger-prune",
-    slack_loglevel = "CRITICAL",
-    stream_loglevel = "DEBUG"
-)
+import logging
+logger = logging.getLogger(__name__)
 
 # Log uncaught exceptions to Slack before exiting
 def log_excepthook(ex_type, ex_value, ex_traceback):
@@ -54,3 +47,4 @@ for user in subscribers:
     #
     # Therefore, I presume, this section shall heretoforth be used for the
     # detection and removal of inactive accounts exclusively.
+    pass

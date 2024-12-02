@@ -17,11 +17,13 @@ import praw
 from pydantic import BaseModel
 from typing_extensions import TypedDict
 import uvicorn
-
+import dotenv
 import pinglib
 
 
+dotenv.load_dotenv()
 api = FastAPI()
+
 
 @api.get(path="/me")
 def get_user(access_token: str) -> str:
@@ -541,4 +543,7 @@ def update_groups(config: UpdateGroups):
 
 
 if __name__ == "__main__":
-    uvicorn.run(api, uds="api.sock", root_path="/api")
+    if os.environ["ENV"] == "dev":
+        uvicorn.run(api, host="localhost", port=8000, root_path="/api")
+    else:
+        uvicorn.run(api, uds="api.sock", root_path="/api")
